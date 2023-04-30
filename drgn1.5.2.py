@@ -142,8 +142,8 @@ else:
         strmodes = str(arrmodenew).replace("[","").replace("]","").replace("'","").replace(","," &")
         if strmodes == "": strmodes = "visible"
         conscolor2 = Fore.LIGHTWHITE_EX
-        build = " (29.04.2023)"
-        version = "v1.5.1"
+        build = " (30.04.2023)"
+        version = "v1.5.2"
         additionaltext1 = conscolor2 + "build: " + conscolor + version + build+"    "
         additionaltext2 = conscolor2 + "    contact: " + conscolor + "@aaa_win (Telegram)" + conscolor2
         additionaltext3 = conscolor2 + "        mode: " + conscolor + strmodes + conscolor2
