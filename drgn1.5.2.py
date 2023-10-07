@@ -35,24 +35,7 @@ subprocess.call('taskkill /F /IM chrome.exe', creationflags=CREATE_NO_WINDOW)
 
 
 def check():
-    auth = False
-    ls = ['https://api.github.com/gists/ce5e09acfbe392ebc11c288672998db9', 'https://pastebin.com/gXrvk0v2']
-    hwid = str(subprocess.check_output(
-        'wmic csproduct get uuid')).split('\\r\\n')[1].strip('\\r').strip()
-    for lserv in ls:
-        data = requests.get(
-            f'{lserv}')
-        if hwid in data.text:
-            auth = True
-
-            break
-        else:
-
-            time.sleep(1)
-    if not auth:
-        print("Ваш ключ:", hwid,
-              "\n\nОтправьте его продавцу @aaa_win, и ключ будет активирован, если вы оплатили программу.\n")
-        exit()
+    # проверка лицензии отключена  https://t.me/drgn_script/106
 
 check()
 def read_config():
