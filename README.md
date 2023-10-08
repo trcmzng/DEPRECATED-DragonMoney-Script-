@@ -10,8 +10,11 @@ https://t.me/drgn_script
 инструкция по установке? софта который больше не работает? ну ладно
 
 git clone https://github.com/trcmzng/dragonmoneyscript.git
+
 cd dragonmoneyscript
+
 pip install -r requirements.txt
+
 python drgn1.5.2.py
 
 он запустится и закроется
