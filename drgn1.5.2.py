@@ -2,40 +2,31 @@ import configparser
 import os
 import re
 import time
-
-import pyautogui as pyautogui
 import requests as requests
 from colorama import init, Fore
 from pyrogram import Client
 from pyrogram import filters
-# import undetected_chromedriver as webdriver
 from selenium import webdriver
-
 init(autoreset=True)
 from datetime import datetime
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-pyautogui.FAILSAFE = False
-from selenium.webdriver import Keys
+from selenium.webdriver.common.keys import Keys
 import psutil
 import subprocess
 import platform
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 os.system("title DragonMoney by: trcmzng")
 
-profileg = str("C:\\Users\\Администратор\\AppData\\Local\\Google\\Chrome\\User Data,Default")
-
 CREATE_NO_WINDOW = 0x08000000
 subprocess.call('taskkill /F /IM chrome.exe', creationflags=CREATE_NO_WINDOW)
 
-
-
 def check():
-    # проверка лицензии отключена  https://t.me/drgn_script/106
+    # система лицензий отключена )))
+    auth = True
 
 check()
 def read_config():
@@ -59,15 +50,10 @@ except IOError as e:
     print(u'Создан новый конфиг, настройте его.')
     with open(r"config.ini", 'w', encoding="UTF-8") as configfileObj:
         config_file.add_section("tg")
-        #config_file.set("tg", "api_id", "00000000")
-        #config_file.set("tg", "api_hash", "00000000000000000000000000000000")
         config_file.set("tg", "user_id", "000000000")
         config_file.set("tg", "channels", "channel1,channel2")
-
         config_file.add_section("settings")
         config_file.set("settings", "profile", "путь до профиля")
-        #config_file.set("settings", "vklogin", "")
-        #config_file.set("settings", "vkpass", "")
         config_file.set("settings", "mode", "visible")
         config_file.write(configfileObj)
         configfileObj.flush()
@@ -81,10 +67,8 @@ else:
         api_id = 12816644
         api_hash = 'bc9c123cb6beea4b2624c111910b3a23'
         user_id = config['tg']['user_id']
-        url = f'''https://{requests.get('https://dr2.to/srv/api/v1/url/drgn').json()['response']['url'].split('/')[2]}/'''+'bonus'
+        url = f'''https://{requests.get('https://dr5.to/srv/api/v1/url/drgn').json()['response']['url'].split('/')[2]}/'''+'bonus'
         mode = config['settings']['mode']
-        #vklogin = config['settings']['vklogin']
-        #vkpass = config['settings']['vkpass']
         conscolor = Fore.CYAN
         arrmodenew = []
 
@@ -92,18 +76,17 @@ else:
         for element in arrmode:
             if ((element == "visible") or (element == "profile") or (element == "red") or (element == "headless")):
                 arrmodenew.append(element)
-        if "red" in arrmodenew:
-            conscolor = Fore.LIGHTRED_EX
+
+        conscolor = Fore.LIGHTRED_EX
         strmodes = str(arrmodenew).replace("[","").replace("]","").replace("'","").replace(","," &")
         if strmodes == "": strmodes = "visible"
         conscolor2 = Fore.LIGHTWHITE_EX
-        build = " (30.04.2023)"
-        version = "v1.5.2"
+        build = " (08.10.2023)"
+        version = "v1.5.4 UNLOCKED EDITION"
         additionaltext1 = conscolor2 + "build: " + conscolor + version + build+"    "
         additionaltext2 = conscolor2 + "    contact: " + conscolor + "@aaa_win (Telegram)" + conscolor2
         additionaltext3 = conscolor2 + "        mode: " + conscolor + strmodes + conscolor2
         profileg = config['settings']['profile']
-        #kanal = config['post']['postid']
         if (profileg == "путь до профиля"):
              print("Не настроен конфиг!")
              time.sleep(5)
@@ -114,8 +97,6 @@ options = webdriver.ChromeOptions()
 profileg = profileg.split(",")
 options.add_argument(f'--user-data-dir={profileg[0]}')
 options.add_argument(fr'--profile-directory={profileg[1]}')
-#options.add_argument("--proxy-server='direct://'")
-#options.add_argument("--proxy-bypass-list=*")
 if "headless" in arrmodenew:
     options.add_argument("--headless")
 options.add_argument("--disable-renderer-backgrounding")
@@ -123,19 +104,16 @@ options.add_argument("--disable-backgrounding-occluded-windows")
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.75 Safari/537.36 [ip:93.37.160.175]")
 
-driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+driver = webdriver.Chrome(options=options, service=Service())
 driver.set_window_size(620, 900)
-
-
-
 bancolor = Fore.WHITE
 
 # хотел сделать анимацию но потом забил хуй
 for bancolor in [Fore.LIGHTWHITE_EX]:
     os.system('cls' if os.name == 'nt' else 'clear')
 
-    banner = ("\n\n    █▀▄ █▀█ ▄▀█ █▀▀ █▀█ █▄░█   █▀ █▀▀ █▀█ █ █▀█ ▀█▀   █▄▄ █▄█ ▀   ▀█▀ █▀█ █▀▀ █▀▄▀█ ▀█ █▄░█ █▀▀\n" +
-              "    █▄▀ █▀▄ █▀█ █▄█ █▄█ █░▀█   ▄█ █▄▄ █▀▄ █ █▀▀ ░█░   █▄█ ░█░ ▄   ░█░ █▀▄ █▄▄ █░▀░█ █▄ █░▀█ █▄█\n\n")
+    banner = (f"\n\n{conscolor2}    █▀▄ █▀█ ▄▀█ █▀▀ █▀█ █▄░█   █▀ █▀▀ █▀█ █ █▀█ ▀█▀   █▄▄ █▄█ ▀ {conscolor}  ▀█▀ █▀█ █▀▀ █▀▄▀█ ▀█ █▄░█ █▀▀\n" +
+                  f"{conscolor2}    █▄▀ █▀▄ █▀█ █▄█ █▄█ █░▀█   ▄█ █▄▄ █▀▄ █ █▀▀ ░█░   █▄█ ░█░ ▄  {conscolor} ░█░ █▀▄ █▄▄ █░▀░█ █▄ █░▀█ █▄█\n\n")
     print(Fore.WHITE + "\n\n    " + additionaltext1 + additionaltext2 + additionaltext3 + bancolor + banner, end="")
 
 with open("blacklist.txt", "r", encoding="UTF-8") as f:
@@ -195,16 +173,18 @@ try:
     driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div/div[2]/button/div").click()
 except: pass
 
-driver.find_element(By.CLASS_NAME, "input").send_keys("trc")
-driver.find_element(By.CLASS_NAME, "input").send_keys(Keys.ENTER)
-driver.execute_script("window.scrollTo(0, -200);")
+try:
+    driver.find_element(By.CLASS_NAME, "input").send_keys("trc")
+    driver.find_element(By.CLASS_NAME, "input").send_keys(Keys.ENTER)
+    driver.execute_script("window.scrollTo(0, -200);")
 
-time.sleep(1)
+    time.sleep(1)
+    driver.find_element(By.CLASS_NAME, "input").send_keys(Keys.BACKSPACE*3)
+except:
+    pass
 
-
-driver.find_element(By.CLASS_NAME, "input").send_keys(Keys.BACKSPACE*3)
 send_message_bot(user_id,"🎉 Скрипт запущен! По всем вопросам: [@aaa_win](t.me/aaa_win)")
-print(conscolor+"    [!] "+ conscolor2+"Скрипт запущен!                      ")
+print(conscolor+"    [!] "+ conscolor2+f"Скрипт запущен! Но {conscolor} работать скорее всего уже не будет {conscolor2}(за пол года сайт пофиксил обход капчи)                     ")
 
 @app.on_message(filt)
 async def listener(client, message):
